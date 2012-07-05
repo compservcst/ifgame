@@ -209,7 +209,7 @@ class player
                          {
                              inventory.push_back(*it);
                              location->items.erase(it);
-                             cout << name << " taken." << endl;
+                             cout << iname << " taken." << endl;
                          }
                          break;
                      }
@@ -260,6 +260,25 @@ class player
                  else
                  {
                       cout << "The " << iname << " doesn't know anything about that." << endl;
+                 }
+             }
+             void drop(string iname)
+             {
+                 bool found = false;
+                 for(vector<item*>::iterator it = inventory.begin(); it != inventory.end(); it++)
+                 {
+                     if((*it)->name == iname)
+                     {
+                         found = true;
+                         location->addItem(*it);
+                         inventory.erase(it);
+                         cout << "Dropped." << endl;
+                         break;
+                     }
+                 }
+                 if(found == false)
+                 {
+                      cout << "You aren't carrying that." << endl;
                  }
              }
              void printInv()
@@ -313,6 +332,12 @@ int prompt()
      {
          Bob->look();
      }
+     else if(input == "i" || input == "inventory")
+     {
+         cout << "Your inventory contains: " << endl;
+         Bob->printInv();
+         cout << endl;
+     }
      else if(input == "quit")
      {
          cout << "Quitting..." << endl;
@@ -326,6 +351,8 @@ int prompt()
          cout << "north/n , south/s , east/e , west/w" << endl;
          cout << "examine/x ITEM" << endl;
          cout << "take/get ITEM" << endl;
+         cout << "drop ITEM" << endl;
+         cout << "inventory/i" << endl;
          cout << "ask NPC_NAME about QUESTION" << endl;
          cout << "quit" << endl;
          cout << "-----------------------" << endl;
@@ -333,6 +360,10 @@ int prompt()
      else if((words.at(0) == "take" || words.at(0) == "get") && words.size() > 1)
      {
           Bob->take(words.at(1));
+     }
+     else if(words.at(0) == "drop" && words.size() > 1)
+     {
+          Bob->drop(words.at(1));
      }
      else if((words.at(0) == "examine" || words.at(0) == "x") && words.size() > 1)
      {
@@ -352,7 +383,7 @@ int prompt()
      return 1;
 }
 
-room* headHall = new room("Long Hallway", "You are standing at the beginning of a long hallway.\nThe hallway stretches about 10000m to the north.", NULL, NULL, NULL, NULL);
+room* headHall = new room("Long Hallway", "You are standing at the beginning of a long hallway.\nThe hallway stretches about 1000m to the north.", NULL, NULL, NULL, NULL);
 
 int main()
 {
@@ -369,6 +400,8 @@ int main()
         proom->connectRoom(rBuf, 'n');
         proom = proom->toNorth;
     }
+    proom->roomName = "End of hallway";
+    proom->description = "You are standing at the northern end of the hallway.";
     proom->toNorth = NULL;
     nBuf = new npc("troll", "It is a huge, haughty troll.");
     nBuf->addResponse("treasure", "There is no treasure here.");
