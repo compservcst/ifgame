@@ -1,4 +1,4 @@
 IFgame
 ======
 
-IFgame, copyright Gabriel Chao.
+IFgame is a console-based RPG.
