@@ -76,7 +76,7 @@ class room
                           toWest = rm;
                           toWest->toEast = this;
                           break;
-                     
+
                  }
              }
              vector<item*> items;
@@ -116,7 +116,7 @@ class player
                       else
                       {
                           cout << "There is a " << (location->items.front())->name << " here." << endl;
-                      }   
+                      }
                   }
                   else
                   {
@@ -126,7 +126,7 @@ class player
                   {
                       cout << "There is a " << it->first << " here." << endl;
                   }
-                  
+
              }
              bool move(string direction)
              {
@@ -225,7 +225,7 @@ class player
                  for(vector<item*>::iterator it = location->items.begin(); it != location->items.end(); it++)
                  {
                      if((*it)->name == iname)
-                     {                
+                     {
                          cout << (*it)->description << endl;
                          found = true;
                          break;
@@ -234,7 +234,7 @@ class player
                  for(vector<item*>::iterator it = inventory.begin(); it != inventory.end(); it++)
                  {
                      if((*it)->name == iname)
-                     {                
+                     {
                          cout << (*it)->description << endl;
                          found = true;
                          break;
@@ -302,7 +302,7 @@ vector<string> splitLine(string input)
 {
      stringstream ss(input);
      vector<string> tokens;
-     
+
      string buf;
      while(ss.good())
      {
@@ -327,7 +327,7 @@ int prompt()
          cout << *it << "-";
      }
      */
-     
+
      if(input == "l" || input == "look")
      {
          Bob->look();
@@ -392,7 +392,7 @@ int main()
     npc* nBuf = NULL;
     room* rBuf = NULL;
     headHall->addItem(iBuf);
-    
+
     room* proom = headHall;
     for(int i = 0; i < 100; i++)
     {
@@ -406,18 +406,17 @@ int main()
     nBuf = new npc("troll", "It is a huge, haughty troll.");
     nBuf->addResponse("treasure", "There is no treasure here.");
     proom->addNpc(nBuf);
-    
+
     cout << "Annoyotron" << endl << endl;
     Bob->look();
     int status = 1;
-    
+
     while(status != 0)
     {
         status = prompt();
     }
-    
-    system("PAUSE");
+
+    //system("PAUSE"); //windows only crap
+    std::cin.get();
     return 0;
 }
-    
-    

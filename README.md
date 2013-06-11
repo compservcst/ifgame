@@ -1,4 +1,4 @@
 IFgame
 ======
 
-IFgame is a console-based RPG.
+IFgame is a console-based adventure game.
