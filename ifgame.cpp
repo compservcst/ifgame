@@ -416,7 +416,5 @@ int main()
         status = prompt();
     }
 
-    //system("PAUSE"); //windows only crap
-    //std::cin.get();
     return 0;
 }
