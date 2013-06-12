@@ -417,6 +417,6 @@ int main()
     }
 
     //system("PAUSE"); //windows only crap
-    std::cin.get();
+    //std::cin.get();
     return 0;
 }
